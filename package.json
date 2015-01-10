@@ -1,0 +1,8 @@
+{
+  "jspm": {
+    "name": "montageporn",
+    "dependencies": {
+      "jsonp": "npm:jsonp@^0.1.0"
+    }
+  }
+}

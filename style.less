@@ -1,0 +1,121 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  background: black;
+  overflow: hidden;
+}
+
+.makeRandom(@min: 0, @max: @min+1, @int: 0) { 
+  .checkInt() {
+    @getNum: `Math.random() * (@{max} - @{min} + @{int})`;
+    @base: unit(`@{int} == 1 ? Math.floor(@{getNum}) : @{getNum}`);
+  }
+  .checkInt();
+  @randNum: @base + @min;
+}
+
+.for(@i, @n) {.-each(@i)}
+.for(@n)     when (isnumber(@n)) {.for(1, @n)}
+.for(@i, @n) when not (@i = @n)  {
+    .for((@i + ((@n - @i) / abs(@n - @i))), @n);
+}
+.for(@array)   when (default()) {.for-impl_(length(@array))}
+.for-impl_(@i) when (@i > 1)    {.for-impl_((@i - 1))}
+.for-impl_(@i)                  {.-each(extract(@array, @i));}
+
+@setPX: `setPX = function(min,max) { return ((Math.random() * max*2 + max * -1)+'px'); }`;
+@setScalar: `setScalar = function(min,max) { return ((Math.random() * max*2 + min)+' '); }`;
+@setRot: `setRot = function(min,max) { return ((Math.random() * max*2 + min)+'deg'); }`;
+
+@-webkit-keyframes crazya {
+    .for(0,100);.-each(@i){
+        @selector: e('@{i}%');
+
+        @{selector} {
+            -webkit-transform: translate(~`setPX(-100,900)`, ~`setPX(-900,900)`) rotate(~`setRot(-500,900)`) scale(~`setScalar(.5,1.2)`);
+        }
+    }
+}
+@-webkit-keyframes crazyb {
+    .for(0,100);.-each(@i){
+        @selector: e('@{i}%');
+
+        @{selector} {
+            -webkit-transform: translate(~`setPX(-200,500)`, ~`setPX(-100,40)`) rotate(~`setRot(-900,100)`) scale(~`setScalar(.5,1.2)`);
+        }
+    }
+}
+@-webkit-keyframes crazyc {
+    .for(0,100);.-each(@i){
+        @selector: e('@{i}%');
+
+        @{selector} {
+            -webkit-transform: translate(~`setPX(-200,300)`, ~`setPX(-800,900)`) rotate(~`setRot(-100,200)`) scale(~`setScalar(.5,1.2)`);
+        }
+    }
+}
+@-webkit-keyframes crazyd {
+    .for(0,100);.-each(@i){
+        @selector: e('@{i}%');
+
+        @{selector} {
+            -webkit-transform: translate(~`setPX(-500,900)`, ~`setPX(-600,200)`) rotate(~`setRot(-400,600)`) scale(~`setScalar(.5,1.2)`);
+        }
+    }
+}
+@-webkit-keyframes crazye {
+    .for(0,100);.-each(@i){
+        @selector: e('@{i}%');
+
+        @{selector} {
+            -webkit-transform: translate(~`setPX(-500,900)`, ~`setPX(-600,200)`) rotate(~`setRot(-400,600)`) scale(~`setScalar(.5,1.2)`);
+        }
+    }
+}
+@-webkit-keyframes crazyf {
+    .for(0,100);.-each(@i){
+        @selector: e('@{i}%');
+
+        @{selector} {
+            -webkit-transform: translate(~`setPX(-500,900)`, ~`setPX(-600,200)`) rotate(~`setRot(-400,600)`) scale(~`setScalar(.5,1.2)`);
+        }
+    }
+}
+
+#vids > iframe {
+  display: block;
+  float: left;
+  width: 25vw;
+  height: 25vh;
+  object-fit: cover;
+  border: 0;
+  -webkit-animation-name: crazya;
+  -webkit-animation-duration: 60s;
+  -webkit-transform-origin:50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+#vids > iframe:nth-child(2n) {
+  -webkit-animation-name: crazya;
+}
+#vids > iframe:nth-child(3n) {
+  -webkit-animation-name: crazyb;
+}
+#vids > iframe:nth-child(4n) {
+  -webkit-animation-name: crazyc;
+  -webkit-animation-duration: 30s;
+}
+#vids > iframe:nth-child(5n) {
+  -webkit-animation-name: crazyd;
+  -webkit-animation-duration: 120s;
+}
+#vids > iframe:nth-child(6n) {
+  -webkit-animation-name: crazye;
+  -webkit-animation-duration: 40s;
+}
+#vids > iframe:nth-child(7n) {
+  -webkit-animation-name: crazyf;
+  -webkit-animation-duration: 50s;
+}
